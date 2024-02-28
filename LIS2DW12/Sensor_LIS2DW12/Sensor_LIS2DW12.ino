@@ -61,6 +61,7 @@ void setup()
   // 这里为简化配置, 不过多解释寄存器详细配置位, 感兴趣可自行参照芯片手册
   uint8_t value = 0x44;   // REG_CTRL_REG2 复位
   writeReg(REG_CTRL_REG2, &value, 1);
+  delay(15);   // 模块复位需要等待一点时间
   value = 0x40;   // Low-Power mode1 50 Hz
   writeReg(REG_CTRL_REG1, &value, 1);
   value = 0x00;   // ODR/2   ±2 g   low-pass filter path selected   disabled low-noise

@@ -33,7 +33,7 @@ void setup()
   Wire.write(0xC0);
   Wire.write(0xFF);
   Wire.endTransmission();
-  delay(15);
+  delay(15);   // 等待初始化使能
   Serial.println("Success to initialize the sensor");
 }
 
