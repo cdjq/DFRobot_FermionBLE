@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <Wire.h>
 
 #define MODULE_I2C_ADDRESS   ((uint8_t)0x73)   // 传感器的 I2C 地址
@@ -24,6 +25,7 @@ void setup()
   Serial.begin(115200);
   Wire.begin();
 
+  delay(390);   // 等待模块上电启动完成
   // 这里为简化配置, 不过多解释寄存器详细配置位, 感兴趣可自行参照芯片手册
   Wire.beginTransmission(MODULE_I2C_ADDRESS);
   // reg

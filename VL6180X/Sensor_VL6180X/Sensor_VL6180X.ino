@@ -1,11 +1,12 @@
+#include <Arduino.h>
 #include <Wire.h>
 
 #define MODULE_I2C_ADDRESS   ((uint8_t)0x29)   // 传感器的 I2C 地址
 
-//Device model identification number：0XB4
+//Device model identification number：0xB4
 #define VL6180X_IDENTIFICATION_MODEL_ID               0x000
 #define VL6180X_SYSTEM_MODE_GPIO0                     0X010
-#define VL6180X_SYSTEM_MODE_GPIO1                     0X011
+#define VL6180X_SYSTEM_MODE_GPIO1                     0x011
 #define VL6180X_SYSTEM_INTERRUPT_CONFIG_GPIO          0x014
 #define VL6180X_SYSTEM_INTERRUPT_CLEAR                0x015
 #define VL6180X_SYSTEM_FRESH_OUT_OF_RESET             0x016
@@ -106,6 +107,7 @@ void setup()
   Serial.begin(115200);
   Wire.begin();
 
+  delay(10);   // 等待模块上电启动完成
   // 这里为简化配置, 不过多解释寄存器详细配置位, 感兴趣可自行参照芯片手册
   // if(read(VL6180X_SYSTEM_FRESH_OUT_OF_RESET,1)){
     write8bit(0x0207, 0x01);

@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <Wire.h>
 
 #define SHT40_ADDRESS 0x44 // 传感器的 I2C 地址，此处的SHT40为0x44

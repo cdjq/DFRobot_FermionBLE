@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <Wire.h>
 
 #define MODULE_I2C_ADDRESS   ((uint8_t)0x63)   // 传感器的 I2C 地址, 此处的 ICP10111 为 0x63
