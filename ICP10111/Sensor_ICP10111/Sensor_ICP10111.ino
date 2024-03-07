@@ -79,6 +79,34 @@ sUltimatelyData_t* _o = &_outData;
 
 int l = 3;// 读字节长度 in100 需 <= 5
 
+void setup()
+{
+  Serial.begin(115200);
+  Wire.begin();
+
+  while (begin() != 0) {
+    Serial.println("Failed to initialize the sensor");
+  }
+  Serial.println("Success to initialize the sensor");
+}
+
+void loop()
+{
+  short otp[4];
+  readOtpFromI2c(otp);   // 为确保能收到校准值，所以重复读取，这里没有意义
+  getTempAndAirPressure();
+  Serial.print("Read air pressure:");
+  Serial.print(_t->airPressure);
+  Serial.println("Pa");
+  Serial.print("Read temperature:");
+  Serial.print(_t->temp);
+  Serial.println("°C");
+  Serial.print("Read altitude:");
+  Serial.print(_t->elevation);
+  Serial.println("m");
+  delay(1000);
+}
+
 void writeReg(uint16_t reg, void* pBuf, size_t size)
 {
   if (pBuf == NULL) {
@@ -201,32 +229,4 @@ int8_t begin(void)
     return 0;
   }
   return -1;
-}
-
-void setup()
-{
-  Serial.begin(115200);
-  Wire.begin();
-
-  while (begin() != 0) {
-    Serial.println("Failed to initialize the sensor");
-  }
-  Serial.println("Success to initialize the sensor");
-}
-
-void loop()
-{
-  short otp[4];
-  readOtpFromI2c(otp);   // 为确保能收到校准值，所以重复读取，这里没有意义
-  getTempAndAirPressure();
-  Serial.print("Read air pressure:");
-  Serial.print(_t->airPressure);
-  Serial.println("Pa");
-  Serial.print("Read temperature:");
-  Serial.print(_t->temp);
-  Serial.println("°C");
-  Serial.print("Read altitude:");
-  Serial.print(_t->elevation);
-  Serial.println("m");
-  delay(1000);
 }
